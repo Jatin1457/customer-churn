@@ -8,29 +8,29 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 import streamlit as st
 
-Step 1: Load Data
+#Step 1: Load Data
 
 data = pd.read_csv("https://raw.githubusercontent.com/IBM/churn/master/data/customer-churn.csv")
 
-Step 2: Data Preprocessing
+#Step 2: Data Preprocessing
 
 data.drop(["customerID"], axis=1, inplace=True)  # Remove irrelevant column label_encoder = LabelEncoder() data['Churn'] = label_encoder.fit_transform(data['Churn'])
 
-Convert categorical columns
+#Convert categorical columns
 
 data = pd.get_dummies(data, drop_first=True)
 
-Step 3: Train-Test Split
+#Step 3: Train-Test Split
 
 X = data.drop("Churn", axis=1) y = data["Churn"] X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-Step 4: Model Training
+#Step 4: Model Training
 
 scaler = StandardScaler() X_train = scaler.fit_transform(X_train) X_test = scaler.transform(X_test)
 
 model = RandomForestClassifier(n_estimators=100, random_state=42) model.fit(X_train, y_train)
 
-Step 5: Streamlit App
+#Step 5: Streamlit App
 
 def main(): st.set_page_config(page_title="Customer Churn Prediction App", layout="wide") st.title("📊 Customer Churn Prediction Dashboard") st.write("Enter customer details to predict churn and explore data insights.")
 
